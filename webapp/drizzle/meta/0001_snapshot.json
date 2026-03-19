@@ -1,6 +1,6 @@
 {
-  "id": "a4ebe345-c1b2-4048-8f6c-b8495011fc34",
-  "prevId": "aec478b9-f329-42de-adf1-f7cb47232d26",
+  "id": "6af6d6ba-2584-4f34-9614-472f31e0c3a3",
+  "prevId": "1679b73c-6b69-4c88-82f8-092304eccf76",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -192,6 +192,55 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.pg-drizzle_tts": {
+      "name": "pg-drizzle_tts",
+      "schema": "",
+      "columns": {
+        "src_blob": {
+          "name": "src_blob",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "gen_blob": {
+          "name": "gen_blob",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "segment_id": {
+          "name": "segment_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "speaker_id": {
+          "name": "speaker_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "start": {
+          "name": "start",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "end": {
+          "name": "end",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.user": {
       "name": "user",
       "schema": "",
@@ -338,11 +387,19 @@
           "primaryKey": false,
           "notNull": true
         },
-        "status": {
-          "name": "status",
+        "completed_blob": {
+          "name": "completed_blob",
           "type": "text",
           "primaryKey": false,
           "notNull": false
+        },
+        "status": {
+          "name": "status",
+          "type": "video_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'queued'"
         },
         "source_language": {
           "name": "source_language",
@@ -387,59 +444,26 @@
       "name": "language_code",
       "schema": "public",
       "values": [
-        "ar",
-        "bn",
-        "bg",
-        "ca",
-        "zh-Hans",
-        "zh-Hant",
-        "hr",
-        "cs",
-        "da",
-        "nl",
-        "en",
-        "et",
-        "fil",
-        "fi",
-        "fr",
-        "fr-ca",
-        "de",
-        "el",
-        "gu",
-        "he",
-        "hi",
-        "hu",
-        "is",
-        "id",
-        "it",
-        "ja",
-        "kn",
-        "ko",
-        "lv",
-        "lt",
-        "ml",
-        "mr",
-        "nb",
-        "fa",
-        "pl",
-        "pt",
-        "pt-pt",
-        "pa",
-        "ro",
-        "ru",
-        "sr-Cyrl",
-        "sk",
-        "sl",
-        "es",
-        "sw",
-        "sv",
-        "ta",
-        "te",
-        "th",
-        "tr",
-        "uk",
-        "ur",
-        "vi"
+        "Chinese",
+        "English",
+        "Japanese",
+        "Korean",
+        "German",
+        "French",
+        "Russian",
+        "Portuguese",
+        "Spanish",
+        "Italian"
+      ]
+    },
+    "public.video_status": {
+      "name": "video_status",
+      "schema": "public",
+      "values": [
+        "queued",
+        "processing",
+        "done",
+        "failed"
       ]
     }
   },
